@@ -11,6 +11,10 @@ import Foundation
 class BaseLogHandler: LogHandler {
     var destinations: [Destination] = []
         
+    init(destinations: [Destination] = [ConsoleDestination(logLevel: .warning)]) {
+        self.destinations = destinations
+    }
+    
     func addDestination(_ destination: Destination) {
         self.destinations.append(destination)
     }
@@ -27,11 +31,8 @@ class BaseLogHandler: LogHandler {
             tags: tags
         )
         
-        self.destinations.filter({ $0.logLevel < logLevel }).forEach({ $0.log(message: message) })
-//        self.destinations.forEach { $0.log(message: message, logLevel: logLevel, file: file, function: function, line: line, metadata: metadata, tags: tags) }
-    }
-    
-    init(destinations: [Destination] = [ConsoleDestination(logLevel: .verbose)]) {
-        self.destinations = destinations
+        self.destinations
+            .filter { logLevel >= $0.logLevel }
+            .forEach { $0.log(message: message) }
     }
 }
