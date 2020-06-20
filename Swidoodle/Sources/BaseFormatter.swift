@@ -9,35 +9,12 @@
 import Foundation
 
 class BaseFormatter: Formatter {
-    func format(_ content: Formattable) -> String {
-        switch content {
-        case let logLevel as Logger.LogLevel: return self.logLevel.format(logLevel)
-        default: return ""
-        }
+    func format(_ content: LogMessage) -> String {
+        let message = "\(content.logLevel.description) \(content.message) \n \(content.metadata.description) \(content.tags.description)"
+        return message
     }
     
-    var logLevel = LogLevel()
-    
-    struct LogLevel: Formatter {
-        func format(_ content: Formattable) -> String {
-            guard let logLevel = content as? Logger.LogLevel else { return "" }
-            
-            switch logLevel {
-            case .trace:
-                return ""
-            case .verbose:
-                return verbose
-            case .info:
-                return ""
-            case .debug:
-                return ""
-            case .warning:
-                return ""
-            case .error:
-                return ""
-            }
-        }
-        
-        var verbose = "[verbose]"
+    private func format(_ content: Formattable) -> String {
+        return content.description
     }
 }

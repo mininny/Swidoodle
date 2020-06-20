@@ -17,10 +17,7 @@ class ConsoleDestination: Destination {
         self.logLevel = logLevel
     }
     
-    func log(message: @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata, tags: [Logger.Tag]) {
-        guard let message = message() else { return }
-        
-        var constructed = "\(self.timestamp()): \(formatter.format(logLevel)): \(message)"
-        print(constructed)
+    func log(message: LogMessage) {
+        print(formatter.format(message))
     }
 }

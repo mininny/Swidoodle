@@ -9,7 +9,10 @@
 import Foundation
 
 protocol Formatter {
-    func format(_ content: Formattable) -> String
+    func format(_ content: LogMessage) -> String
 }
 
-protocol Formattable { }
+protocol Formattable: CustomStringConvertible { }
+extension String: Formattable { }
+extension Logger.Metadata: Formattable { }
+extension UInt: Formattable { }
