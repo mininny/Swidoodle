@@ -16,10 +16,10 @@ struct LogMessage {
     let function: String
     let line: UInt
     
-    let metadata: Logger.Metadata
-    let tags: [Logger.Tag]
+    let metadata: Logger.Metadata?
+    let tags: [Logger.Tag]?
     
-    init(message: String, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata, tags: [Logger.Tag]) {
+    init(message: String, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tags: [Logger.Tag]?) {
         self.message = message
         self.logLevel = logLevel
         

@@ -9,17 +9,25 @@
 import Foundation
 
 class BaseLogHandler: LogHandler {
-    var destinations: [Destination] = []
+    var identifier: String = UUID().uuidString
+    
+    var destinations: [Destination]
         
-    init(destinations: [Destination] = [ConsoleDestination(logLevel: .warning)]) {
+    init(destinations: [Destination] = []) {
         self.destinations = destinations
     }
     
     func addDestination(_ destination: Destination) {
-        self.destinations.append(destination)
+        if !self.destinations.contains(where: { $0.identifier == destination.identifier }) {
+            self.destinations.append(destination)
+        }
     }
     
-    func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata, tags: [Logger.Tag]) {
+    func removeDestination(_ destination: Destination) {
+        self.destinations.removeAll(where: { $0.identifier == destination.identifier })
+    }
+    
+    func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tags: [Logger.Tag]?) {
         guard let content = message() else { return }
         let message = LogMessage(
             message: "\(content)",

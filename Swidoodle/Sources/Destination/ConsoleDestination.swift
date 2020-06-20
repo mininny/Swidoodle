@@ -9,6 +9,8 @@
 import Foundation
 
 class ConsoleDestination: Destination {
+    var identifier: String = UUID().uuidString
+    
     var queue: DispatchQueue
     var logLevel: Logger.LogLevel
 

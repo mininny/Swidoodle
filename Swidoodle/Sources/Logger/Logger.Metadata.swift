@@ -9,7 +9,7 @@
 import Foundation
 
 extension Logger {
-    public typealias Tag = String
+    public typealias Tag = MetadataValue
     
     public typealias Metadata = [String: MetadataValue]
     

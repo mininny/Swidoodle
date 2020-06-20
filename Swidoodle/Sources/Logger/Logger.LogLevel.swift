@@ -15,17 +15,17 @@ extension Logger {
             case .fallthrough:
                 return ""
             case .trace:
-                return "[TRACE]"
+                return "TRACE"
             case .verbose:
-                return "[VERBOSE]"
+                return "VERBOSE"
             case .info:
-                return "[INFO]"
+                return "INFO"
             case .debug:
-                return "[DEBUG]"
+                return "DEBUG"
             case .warning:
-                return "[WARNING]"
+                return "WARNING"
             case .error:
-                return "[ERROR]"
+                return "ERROR"
             }
         }
         

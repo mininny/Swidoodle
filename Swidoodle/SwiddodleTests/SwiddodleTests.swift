@@ -11,10 +11,13 @@ import XCTest
 
 class SwiddodleTests: XCTestCase {
     func test_swidoodle() {
-//        let logHandler = BaseLogHandler()
-////        let destination = ConsoleDestination(logLevel: .verbose)
-////        logHandler.addDestination(destination)
-//        let logger = Logger(handlers: ["LOL": logHandler], logLevel: .verbose)
-        Logger.warning(message: "HI", metadata: ["asdf":["asdf", "sdf"], "ddd": "asdfa"], tags: ["NICE", "BAD"])
+        let logHandler = BaseLogHandler()
+        let destination = ConsoleDestination(logLevel: .verbose)
+        destination.formatter = BaseFormatter
+        logHandler.addDestination(destination)
+        
+        let logger = Logger(logLevel: .verbose, handlers: [logHandler])
+        logger.warning(message: "AHHHHH", metadata: ["asdf": "1234"])
+//        Logger.warning(message: 1234, metadata: ["asdf":["asdf", "asdf"], "ddd": "asdfa"], tags: ["NICE", "BAD"])
     }
 }

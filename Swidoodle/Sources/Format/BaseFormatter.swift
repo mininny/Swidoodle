@@ -13,7 +13,7 @@ class BaseFormatter: Formatter {
         return [FormatItem](fromFormat: self.logFormat)
     }()
     
-    var logFormat: String = "date logLevel message - function: line \n \t metadata, tag" {
+    var logFormat: String = "date [logLevel] message - function: line \n \t metadata, tag" {
         didSet {
             if oldValue != self.logFormat { self.formattedLogItems = [FormatItem](fromFormat: self.logFormat) }
         }
@@ -41,19 +41,28 @@ class BaseFormatter: Formatter {
             case .function: result += self.format(formattable: content.function)
             case .line: result += self.format(formattable: content.line)
             case .metadata: result += self.format(formattable: content.metadata)
-            case .tag: result += content.tags.map { self.format(formattable: $0) }.description
+            case .tag: result += content.tags?.compactMap { self.format(formattable: $0) }.description ?? ""
             case .default(let str): result += self.format(formattable: str)
             }
-        }
+        }.trimmingCharacters(in: .init(charactersIn: " ,:;-=~[{\\\n\t"))
     }
     
-    func format(formattable content: Formattable) -> String {
+    func format(formattable content: Formattable?) -> String {
         switch content {
-        case let date as Date: return self.dateFormatter.string(from: date)
-        case let logLevel as Logger.LogLevel: return logLevel.description
-        case let metadata as Logger.Metadata: return metadata.map{ "\($0.key) = \($0.value.description)" }.description
-        case let tag as Logger.Tag: return tag.description
-        default: return content.description
+        case let date as Date:
+            return self.dateFormatter.string(from: date)
+        
+        case let logLevel as Logger.LogLevel:
+            return logLevel.description
+        
+        case let metadata as Logger.Metadata:
+            return "{ \(metadata.map{ "\($0.key): { \($0.value.description) }" }.joined(separator: ", ")) }"
+        
+        case let tag as Logger.Tag:
+            return tag.description
+        
+        default:
+            return content?.description ?? ""
         }
     }
 }
