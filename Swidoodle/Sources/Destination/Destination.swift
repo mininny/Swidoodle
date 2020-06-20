@@ -10,5 +10,7 @@ import Foundation
 
 protocol Destination {
     var logLevel: Logger.LogLevel { get set }
+    var queue: DispatchQueue { get set }
+    var formatter: Formatter { get set }
     func log(message: LogMessage)
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52230418249E1BDF005C50B6 /* SwiddodleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52230417249E1BDF005C50B6 /* SwiddodleTests.swift */; };
 		5223041A249E1BDF005C50B6 /* Swidoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523BC09E248D49E500B87CA8 /* Swidoodle.framework */; };
+		52230425249E253F005C50B6 /* Formattable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52230424249E253F005C50B6 /* Formattable.swift */; };
 		523BC0A3248D49E500B87CA8 /* Swidoodle.h in Headers */ = {isa = PBXBuildFile; fileRef = 523BC0A1248D49E500B87CA8 /* Swidoodle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		523BC0BF248D4AC500B87CA8 /* Swidoodle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0BE248D4AC500B87CA8 /* Swidoodle.swift */; };
 		523BC0C2248D51A600B87CA8 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0C1248D51A600B87CA8 /* Logger.swift */; };
@@ -35,6 +36,7 @@
 		52230415249E1BDF005C50B6 /* SwiddodleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiddodleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		52230417249E1BDF005C50B6 /* SwiddodleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiddodleTests.swift; sourceTree = "<group>"; };
 		52230419249E1BDF005C50B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		52230424249E253F005C50B6 /* Formattable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formattable.swift; sourceTree = "<group>"; };
 		523BC09E248D49E500B87CA8 /* Swidoodle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swidoodle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		523BC0A1248D49E500B87CA8 /* Swidoodle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Swidoodle.h; sourceTree = "<group>"; };
 		523BC0A2248D49E500B87CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +79,34 @@
 			path = SwiddodleTests;
 			sourceTree = "<group>";
 		};
+		52230421249E250A005C50B6 /* LogHandler */ = {
+			isa = PBXGroup;
+			children = (
+				523BC0C3248D544400B87CA8 /* LogHandler.swift */,
+				523BC0C7248D548400B87CA8 /* BaseLogHandler.swift */,
+			);
+			path = LogHandler;
+			sourceTree = "<group>";
+		};
+		52230422249E2513005C50B6 /* Destination */ = {
+			isa = PBXGroup;
+			children = (
+				523BC0C5248D545C00B87CA8 /* Destination.swift */,
+				523BC0C9248D5A3400B87CA8 /* ConsoleDestination.swift */,
+			);
+			path = Destination;
+			sourceTree = "<group>";
+		};
+		52230423249E251A005C50B6 /* Format */ = {
+			isa = PBXGroup;
+			children = (
+				523BC0CB248D611E00B87CA8 /* Formatter.swift */,
+				52230424249E253F005C50B6 /* Formattable.swift */,
+				523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */,
+			);
+			path = Format;
+			sourceTree = "<group>";
+		};
 		523BC094248D49E400B87CA8 = {
 			isa = PBXGroup;
 			children = (
@@ -102,12 +132,9 @@
 				523BC0A1248D49E500B87CA8 /* Swidoodle.h */,
 				523BC0BE248D4AC500B87CA8 /* Swidoodle.swift */,
 				523BC0C1248D51A600B87CA8 /* Logger.swift */,
-				523BC0C3248D544400B87CA8 /* LogHandler.swift */,
-				523BC0C7248D548400B87CA8 /* BaseLogHandler.swift */,
-				523BC0C5248D545C00B87CA8 /* Destination.swift */,
-				523BC0C9248D5A3400B87CA8 /* ConsoleDestination.swift */,
-				523BC0CB248D611E00B87CA8 /* Formatter.swift */,
-				523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */,
+				52230421249E250A005C50B6 /* LogHandler */,
+				52230422249E2513005C50B6 /* Destination */,
+				52230423249E251A005C50B6 /* Format */,
 				52C94A8E24938B1600ADA6DB /* LogMessage.swift */,
 			);
 			path = Sources;
@@ -236,6 +263,7 @@
 				523BC0BF248D4AC500B87CA8 /* Swidoodle.swift in Sources */,
 				52C94A8F24938B1600ADA6DB /* LogMessage.swift in Sources */,
 				523BC0CC248D611E00B87CA8 /* Formatter.swift in Sources */,
+				52230425249E253F005C50B6 /* Formattable.swift in Sources */,
 				523BC0C6248D545C00B87CA8 /* Destination.swift in Sources */,
 				523BC0CE248D612D00B87CA8 /* BaseFormatter.swift in Sources */,
 				523BC0C8248D548400B87CA8 /* BaseLogHandler.swift in Sources */,

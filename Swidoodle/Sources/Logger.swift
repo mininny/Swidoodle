@@ -29,29 +29,11 @@ struct Logger {
 }
 
 extension Logger {
-    public typealias Tag = String
-    
-    public typealias Metadata = [String: MetaDataValue]
-    
-    enum MetaDataValue: Formattable {
-        var description: String {
-            switch self {
-            case .string(let string): return string
-            case .stringConvertible(let string): return string.description
-            case .array(let array): return array.map { $0.description }.joined(separator: ",")
-            case .dict(let dict): return dict.map { "\($0): \($1.description)" }.joined(separator: ",")
-            }
-        }
-        
-        case string(String)
-        case stringConvertible(CustomStringConvertible)
-        case array([MetaDataValue])
-        case dict([String: MetaDataValue])
-    }
-    
     enum LogLevel: Int, Comparable, Formattable {
         var description: String {
             switch self {
+            case .fallthrough:
+                return ""
             case .trace:
                 return "[TRACE]"
             case .verbose:
@@ -69,12 +51,35 @@ extension Logger {
         
         static func < (lhs: Logger.LogLevel, rhs: Logger.LogLevel) -> Bool { lhs.rawValue < rhs.rawValue }
         
+        case `fallthrough`
         case trace
         case verbose
         case info
         case debug
         case warning
         case error
+    }
+}
+
+extension Logger {
+    public typealias Tag = String
+    
+    public typealias Metadata = [String: MetaDataValue]
+    
+    enum MetaDataValue: Formattable {
+        var description: String {
+            switch self {
+            case .string(let string): return string.description
+            case .stringConvertible(let string): return string.description
+            case .array(let array): return array.map { $0.description }.joined(separator: ", ")
+            case .dict(let dict): return dict.map { "\($0.description): \($1.description)" }.joined(separator: ", ")
+            }
+        }
+        
+        case string(String)
+        case stringConvertible(CustomStringConvertible)
+        case array([MetaDataValue])
+        case dict([String: MetaDataValue])
     }
 }
 
@@ -93,8 +98,6 @@ extension Logger.MetaDataValue: ExpressibleByStringInterpolation, ExpressibleByS
     }
 }
 
-// Extension has to be done on explicit type rather than Logger.Metadata.Value as workaround for
-// https://bugs.swift.org/browse/SR-9686
 extension Logger.MetaDataValue: ExpressibleByDictionaryLiteral {
     public typealias Key = String
     public typealias Value = Logger.MetaDataValue

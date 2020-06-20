@@ -9,12 +9,14 @@
 import Foundation
 
 class ConsoleDestination: Destination {
+    var queue: DispatchQueue
     var logLevel: Logger.LogLevel
+
+    var formatter: Formatter = BaseFormatter()
     
-    var formatter = BaseFormatter()
-    
-    init(logLevel: Logger.LogLevel) {
+    init(logLevel: Logger.LogLevel, queue: DispatchQueue = .global()) {
         self.logLevel = logLevel
+        self.queue = queue
     }
     
     func log(message: LogMessage) {
