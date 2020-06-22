@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct Logger {
-    var handlers: [LogHandler] = []
+public class Logger {
+    var handlers: [String: LogHandler]
     
     var logLevel: LogLevel = .warning
     
-    init(logLevel: LogLevel, handlers: [LogHandler]) {
+    init(logLevel: LogLevel, handlers: [String: LogHandler] = [:]) {
         self.logLevel = logLevel
         self.handlers = handlers
     }
@@ -22,8 +22,8 @@ public struct Logger {
         guard logLevel >= self.logLevel else { return }
 
         self.handlers
-            .filter { $0.logLevel >= self.logLevel }
-            .forEach { $0.log(message: message,
+            .filter { $0.value.logLevel >= self.logLevel }
+            .forEach { $0.value.log(message: message,
                                     logLevel: logLevel,
                                     file: file,
                                     function: function,
@@ -32,6 +32,22 @@ public struct Logger {
                                     tag: tag) }
     }
     
+    func addHandler(_ handler: LogHandler) {
+        guard self.handlers[handler.identifier] == nil else { return }
+        
+        self.handlers[handler.identifier] = handler
+    }
+    
+    func removeHandler(for identifier: String) {
+        self.handlers[identifier] = nil
+    }
+    
+    func removeHandler(_ handler: LogHandler) {
+        self.removeHandler(for: handler.identifier)
+    }
+}
+
+extension Logger {
     public func trace(file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag? = nil) {
         self.log(message: nil, logLevel: .trace, file: file, function: function, line: line, metadata: metadata, tag: tag)
     }

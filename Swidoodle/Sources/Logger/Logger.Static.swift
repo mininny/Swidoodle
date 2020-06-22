@@ -9,7 +9,14 @@
 import Foundation
 
 extension Logger {
-    internal static var main = Logger(logLevel: .debug, handlers: [BaseLogHandler(identifier: "com.logger.main", destinations: [ConsoleDestination(identifier: "com.logger.main.console", logLevel: .debug)])])
+    internal static var main = Logger(logLevel: .debug) {
+        didSet {
+            let consoleDestination = ConsoleDestination(identifier: "com.logger.main.console", logLevel: .debug)
+            let baseLogHandler = BaseLogHandler(identifier: "com.logger.main.baseHandler", destinations: [consoleDestination])
+            
+            self.main.addHandler(baseLogHandler)
+        }
+    }
 }
 
 extension Logger {
