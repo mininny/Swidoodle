@@ -13,8 +13,8 @@ extension Logger {
     
     public typealias Metadata = [String: MetadataValue]
     
-    enum MetadataValue: Formattable {
-        var description: String {
+    public enum MetadataValue: Formattable {
+        public var description: String {
             switch self {
             case .string(let string): return string.description
             case .stringConvertible(let string): return string.description
@@ -39,7 +39,7 @@ extension Logger.MetadataValue: ExpressibleByArrayLiteral {
 }
 
 extension Logger.MetadataValue: ExpressibleByStringInterpolation, ExpressibleByStringLiteral {
-    typealias StringLiteralType = String
+    public typealias StringLiteralType = String
     public init(stringLiteral value: String) {
         self = .string(value)
     }

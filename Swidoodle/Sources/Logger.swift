@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Logger {    
+public struct Logger {    
     var handlers: [LogHandler] = []
     
     var logLevel: LogLevel = .warning
@@ -36,27 +36,27 @@ struct Logger {
                                     tags: tags) }
     }
     
-    func trace(file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
+    public func trace(file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
         self.log(message: nil, logLevel: .trace, file: file, function: function, line: line, metadata: metadata, tags: tags)
     }
     
-    func verbose(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
+    public func verbose(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
         self.log(message: message, logLevel: .verbose, file: file, function: function, line: line, metadata: metadata, tags: tags)
     }
     
-    func info(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
+    public func info(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
         self.log(message: message, logLevel: .info, file: file, function: function, line: line, metadata: metadata, tags: tags)
     }
     
-    func debug(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
+    public func debug(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
         self.log(message: message, logLevel: .debug, file: file, function: function, line: line, metadata: metadata, tags: tags)
     }
     
-    func warning(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
+    public func warning(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
         self.log(message: message, logLevel: .warning, file: file, function: function, line: line, metadata: metadata, tags: tags)
     }
     
-    func error(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
+    public func error(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
         self.log(message: message, logLevel: .error, file: file, function: function, line: line, metadata: metadata, tags: tags)
     }
 }

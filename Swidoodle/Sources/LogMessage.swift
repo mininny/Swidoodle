@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LogMessage {
+public struct LogMessage {
     let message: String
     let logLevel: Logger.LogLevel
 

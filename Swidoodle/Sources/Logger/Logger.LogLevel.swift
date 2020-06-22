@@ -9,8 +9,8 @@
 import Foundation
 
 extension Logger {
-    enum LogLevel: Int, Comparable, Formattable {
-        var description: String {
+    public enum LogLevel: Int, Comparable, Formattable {
+        public var description: String {
             switch self {
             case .fallthrough:
                 return ""
@@ -29,7 +29,7 @@ extension Logger {
             }
         }
         
-        static func < (lhs: Logger.LogLevel, rhs: Logger.LogLevel) -> Bool { lhs.rawValue < rhs.rawValue }
+        public static func < (lhs: Logger.LogLevel, rhs: Logger.LogLevel) -> Bool { lhs.rawValue < rhs.rawValue }
         
         case `fallthrough`
         case trace

@@ -8,12 +8,15 @@
 
 import Foundation
 
-protocol Formatter {
+public protocol Formatter {
     var dateFormat: String { get set }
     var dateFormatter: DateFormatter { get set }
     var logFormat: String { get set }
     var formattedLogItems: [FormatItem] { get }
     
     func format(_ content: LogMessage) -> String
-    func format(formattable content: Formattable?) -> String
+}
+
+extension Formatter {
+    func format(formattable content: Formattable?) -> String { "" }
 }

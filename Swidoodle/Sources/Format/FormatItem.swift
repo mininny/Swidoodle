@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum FormatItem {
+public enum FormatItem {
     var description: String {
         switch self {
         case .default(let str):
@@ -30,7 +30,7 @@ enum FormatItem {
 }
 
 extension FormatItem: RawRepresentable  {
-    typealias RawValue = String
+    public typealias RawValue = String
     public init(rawValue: RawValue) {
         self = FormatItem.allCases.first(where: { $0.asRaw == rawValue }) ?? .default(value: rawValue)
     }

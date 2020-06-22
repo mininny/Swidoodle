@@ -18,5 +18,5 @@ protocol LogHandler {
 }
 
 extension LogHandler {
-    var logLevel: Logger.LogLevel { destinations.map { $0.logLevel }.max() ?? .debug }
+    var logLevel: Logger.LogLevel { destinations.map { $0.logLevel }.min() ?? .debug }
 }

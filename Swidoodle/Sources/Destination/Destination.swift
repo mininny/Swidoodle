@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Destination {
+public protocol Destination {
     var identifier: String { get }
     var logLevel: Logger.LogLevel { get set }
     var queue: DispatchQueue { get set }
