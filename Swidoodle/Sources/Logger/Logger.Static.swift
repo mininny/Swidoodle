@@ -9,30 +9,30 @@
 import Foundation
 
 extension Logger {
-    internal static var main = Logger()
+    internal static var main = Logger(logLevel: .debug, handlers: [BaseLogHandler(identifier: "com.logger.main", destinations: [ConsoleDestination(identifier: "com.logger.main.console", logLevel: .debug)])])
 }
 
 extension Logger {
-    public static func trace(file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]) {
-        self.main.trace(file: file, function: function, line: line, metadata: metadata, tags: tags)
+    public static func trace(file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag) {
+        self.main.trace(file: file, function: function, line: line, metadata: metadata, tag: tag)
     }
     
-    public static func verbose(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]) {
-        self.main.verbose(message: message, file: file, function: function, line: line, metadata: metadata, tags: tags)
+    public static func verbose(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag) {
+        self.main.verbose(message: message, file: file, function: function, line: line, metadata: metadata, tag: tag)
     }
-    public static func info(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]? = nil) {
-        self.main.info(message: message, file: file, function: function, line: line, metadata: metadata, tags: tags)
-    }
-    
-    public static func debug(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]) {
-        self.main.debug(message: message, file: file, function: function, line: line, metadata: metadata, tags: tags)
+    public static func info(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag? = nil) {
+        self.main.info(message: message, file: file, function: function, line: line, metadata: metadata, tag: tag)
     }
     
-    public static func warning(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]) {
-        self.main.warning(message: message, file: file, function: function, line: line, metadata: metadata, tags: tags)
+    public static func debug(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag) {
+        self.main.debug(message: message, file: file, function: function, line: line, metadata: metadata, tag: tag)
     }
     
-    public static func error(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tags: [Tag]) {
-        self.main.error(message: message, file: file, function: function, line: line, metadata: metadata, tags: tags)
+    public static func warning(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag) {
+        self.main.warning(message: message, file: file, function: function, line: line, metadata: metadata, tag: tag)
+    }
+    
+    public static func error(message: @escaping @autoclosure () -> Any?, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag) {
+        self.main.error(message: message, file: file, function: function, line: line, metadata: metadata, tag: tag)
     }
 }

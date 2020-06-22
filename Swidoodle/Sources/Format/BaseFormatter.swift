@@ -41,7 +41,7 @@ class BaseFormatter: Formatter {
             case .function: result += self.format(formattable: content.function)
             case .line: result += self.format(formattable: content.line)
             case .metadata: result += self.format(formattable: content.metadata)
-            case .tag: result += content.tags?.compactMap { self.format(formattable: $0) }.description ?? ""
+            case .tag: result += self.format(formattable: content.tag)
             case .default(let str): result += self.format(formattable: str)
             }
         }.trimmingCharacters(in: .init(charactersIn: " ,:;-=~[{\\\n\t"))

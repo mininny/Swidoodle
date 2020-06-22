@@ -9,11 +9,12 @@
 import Foundation
 
 class BaseLogHandler: LogHandler {
-    var identifier: String = UUID().uuidString
+    var identifier: String
     
     var destinations: [Destination]
         
-    init(destinations: [Destination] = []) {
+    init(identifier: String, destinations: [Destination] = []) {
+        self.identifier = identifier
         self.destinations = destinations
     }
     
@@ -27,7 +28,7 @@ class BaseLogHandler: LogHandler {
         self.destinations.removeAll(where: { $0.identifier == destination.identifier })
     }
     
-    func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tags: [Logger.Tag]?) {
+    func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tag: Logger.Tag?) {
         guard let content = message() else { return }
         let message = LogMessage(
             message: "\(content)",
@@ -36,7 +37,7 @@ class BaseLogHandler: LogHandler {
             function: function,
             line: line,
             metadata: metadata,
-            tags: tags
+            tag: tag
         )
         
         self.destinations

@@ -14,7 +14,7 @@ protocol LogHandler {
     
     func addDestination(_ destination: Destination)
     func removeDestination(_ destination: Destination)
-    func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tags: [Logger.Tag]?)
+    func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tag: Logger.Tag?)
 }
 
 extension LogHandler {

@@ -18,6 +18,6 @@ class SwiddodleTests: XCTestCase {
         
         let logger = Logger(logLevel: .verbose, handlers: [logHandler])
         logger.warning(message: "AHHHHH", metadata: ["asdf": "1234"])
-//        Logger.warning(message: 1234, metadata: ["asdf":["asdf", "asdf"], "ddd": "asdfa"], tags: ["NICE", "BAD"])
+//        Logger.warning(message: 1234, metadata: ["asdf":["asdf", "asdf"], "ddd": "asdfa"], tag: ["NICE", "BAD"])
     }
 }
