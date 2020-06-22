@@ -9,14 +9,15 @@
 import Foundation
 
 class ConsoleDestination: Destination {
-    var identifier: String = UUID().uuidString
+    var identifier: String
     
     var queue: DispatchQueue
     var logLevel: Logger.LogLevel
 
     var formatter: Formatter = BaseFormatter()
     
-    init(logLevel: Logger.LogLevel, queue: DispatchQueue = .global()) {
+    init(identifier: String, logLevel: Logger.LogLevel, queue: DispatchQueue = .global()) {
+        self.identifier = identifier
         self.logLevel = logLevel
         self.queue = queue
     }

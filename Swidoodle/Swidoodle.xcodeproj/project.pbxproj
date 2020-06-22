@@ -22,6 +22,7 @@
 		523BC0CA248D5A3400B87CA8 /* ConsoleDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0C9248D5A3400B87CA8 /* ConsoleDestination.swift */; };
 		523BC0CC248D611E00B87CA8 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0CB248D611E00B87CA8 /* Formatter.swift */; };
 		523BC0CE248D612D00B87CA8 /* BaseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */; };
+		5260680D24A1008A00319980 /* OSLogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5260680C24A1008900319980 /* OSLogDestination.swift */; };
 		52C94A8F24938B1600ADA6DB /* LogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C94A8E24938B1600ADA6DB /* LogMessage.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		523BC0C9248D5A3400B87CA8 /* ConsoleDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleDestination.swift; sourceTree = "<group>"; };
 		523BC0CB248D611E00B87CA8 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormatter.swift; sourceTree = "<group>"; };
+		5260680C24A1008900319980 /* OSLogDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogDestination.swift; sourceTree = "<group>"; };
 		52C94A8E24938B1600ADA6DB /* LogMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMessage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				523BC0C5248D545C00B87CA8 /* Destination.swift */,
+				5260680C24A1008900319980 /* OSLogDestination.swift */,
 				523BC0C9248D5A3400B87CA8 /* ConsoleDestination.swift */,
 			);
 			path = Destination;
@@ -281,6 +284,7 @@
 				52C94A8F24938B1600ADA6DB /* LogMessage.swift in Sources */,
 				523BC0CC248D611E00B87CA8 /* Formatter.swift in Sources */,
 				52230425249E253F005C50B6 /* Formattable.swift in Sources */,
+				5260680D24A1008A00319980 /* OSLogDestination.swift in Sources */,
 				523BC0C6248D545C00B87CA8 /* Destination.swift in Sources */,
 				5223042C249E6F20005C50B6 /* Logger.Static.swift in Sources */,
 				5223042E249E78DE005C50B6 /* FormatItem.swift in Sources */,
