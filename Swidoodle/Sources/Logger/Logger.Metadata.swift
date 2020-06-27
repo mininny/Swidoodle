@@ -53,3 +53,9 @@ extension Logger.MetadataValue: ExpressibleByDictionaryLiteral {
         self = .dict(.init(uniqueKeysWithValues: elements))
     }
 }
+
+extension Optional where Wrapped == Logger.Tag {
+    var debugDescription: String {
+        self?.description ?? ""
+    }
+}

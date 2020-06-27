@@ -18,6 +18,11 @@ public class Logger {
         self.handlers = handlers
     }
     
+    init(logLevel: LogLevel, handlers: [LogHandler] = []) {
+        self.logLevel = logLevel
+        self.handlers = handlers.reduce(into: [String: LogHandler](), { $0[$1.identifier] = $1 })
+    }
+    
     internal func log(message: @escaping @autoclosure () -> Any?, logLevel: LogLevel, file: String = #file, function: String = #function, line: UInt = #line, metadata: Metadata? = nil, tag: Tag? = nil) {
         guard logLevel >= self.logLevel else { return }
 

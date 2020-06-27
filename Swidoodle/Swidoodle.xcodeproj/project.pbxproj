@@ -111,8 +111,8 @@
 			children = (
 				523BC0CB248D611E00B87CA8 /* Formatter.swift */,
 				5223042D249E78DE005C50B6 /* FormatItem.swift */,
-				523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */,
 				52230424249E253F005C50B6 /* Formattable.swift */,
+				523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */,
 			);
 			path = Format;
 			sourceTree = "<group>";

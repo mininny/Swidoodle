@@ -11,10 +11,11 @@ import XCTest
 
 class SwiddodleTests: XCTestCase {
     func test_swidoodle() {
-        let logHandler = BaseLogHandler()
-        let destination = ConsoleDestination(logLevel: .verbose)
-        destination.formatter = BaseFormatter
+        let logHandler = BaseLogHandler(identifier: "handler.base")
+        let destination = ConsoleDestination(identifier: "destination.console", logLevel: .verbose)
         logHandler.addDestination(destination)
+        
+        destination.formatter.logFormat = "date: message \n \t metadata"
         
         let logger = Logger(logLevel: .verbose, handlers: [logHandler])
         logger.warning(message: "AHHHHH", metadata: ["asdf": "1234"])

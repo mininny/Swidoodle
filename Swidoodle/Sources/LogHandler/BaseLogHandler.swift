@@ -24,8 +24,12 @@ class BaseLogHandler: LogHandler {
         }
     }
     
+    func removeDestination(for identifier: String) {
+        self.destinations.removeAll(where: { $0.identifier == identifier })
+    }
+    
     func removeDestination(_ destination: Destination) {
-        self.destinations.removeAll(where: { $0.identifier == destination.identifier })
+        self.removeDestination(for: destination.identifier)
     }
     
     func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tag: Logger.Tag?) {

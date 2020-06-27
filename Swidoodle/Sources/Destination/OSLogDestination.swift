@@ -7,8 +7,9 @@
 //
 
 import Foundation
-import os.log
+import os
 
+@available(iOS 12.0, *)
 class OSLogDestination: Destination {
     var identifier: String
     
@@ -26,14 +27,32 @@ class OSLogDestination: Destination {
     }
     
     func log(message: LogMessage) {
-        guard let logType = message.logLevel.asOSLogType else { return }
+        let formattedMessage = self.formatter.format(message)
         
-        if let tag = message.tag?.description {
-            let osLog = OSLog(subsystem: self.identifier, category: tag)
-            os_log(logType, log: osLog, "%@ : %@", message.message, (message.metadata ?? [:]))
-        } else {
-            os_log(logType, "%@ : %@", message.message, (message.metadata ?? [:]))
-        }
+//        if #available(iOS 14.0, *) {
+//            let logger = os.Logger(subsystem: self.identifier, category: message.tag.debugDescription)
+//
+//            switch message.logLevel {
+//            case .fallthrough: break
+//            case .trace:
+//                logger.trace("\(formattedMessage)")
+//            case .verbose:
+//                logger.info("\(formattedMessage)")
+//            case .info:
+//                logger.notice("\(formattedMessage)")
+//            case .debug:
+//                logger.debug("\(formattedMessage)")
+//            case .warning:
+//                logger.warning("\(formattedMessage)")
+//            case .error:
+//                logger.fault("\(formattedMessage)")
+//            }
+//        } else {
+            guard let logType = message.logLevel.asOSLogType else { return }
+            
+            let osLog = OSLog(subsystem: self.identifier, category: message.tag.debugDescription)
+            os_log(logType, log: osLog, "%@ : %@", formattedMessage, (message.metadata ?? [:]))
+//        }
     }
 }
 
