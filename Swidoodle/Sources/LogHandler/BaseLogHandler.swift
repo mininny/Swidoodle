@@ -33,7 +33,8 @@ class BaseLogHandler: LogHandler {
     }
     
     func log(message: @escaping @autoclosure () -> Any?, logLevel: Logger.LogLevel, file: String, function: String, line: UInt, metadata: Logger.Metadata?, tag: Logger.Tag?) {
-        guard let content = message() else { return }
+        let content = message() ?? ""
+        
         let message = LogMessage(
             message: "\(content)",
             logLevel: logLevel,

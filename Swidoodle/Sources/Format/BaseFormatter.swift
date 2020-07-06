@@ -44,7 +44,7 @@ class BaseFormatter: Formatter {
             case .tag: result += self.format(formattable: content.tag)
             case .default(let str): result += self.format(formattable: str)
             }
-        }.trimmingCharacters(in: .init(charactersIn: " ,:;-=~[{\\\n\t"))
+        }.trimmingCharacters(in: .whitespacesAndNewlines)//.init(charactersIn: " ,:;-=~[{\\\n\t"))
     }
     
     func format(formattable content: Formattable?) -> String {

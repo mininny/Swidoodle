@@ -27,7 +27,6 @@ public class Logger {
         guard logLevel >= self.logLevel else { return }
 
         self.handlers
-            .filter { $0.value.logLevel >= self.logLevel }
             .forEach { $0.value.log(message: message,
                                     logLevel: logLevel,
                                     file: file,

@@ -80,6 +80,7 @@ extension Array where Element == FormatItem {
             }
             current.append(char)
         }
+        if current != "" { result.append(current) }
         
         self = result.map({ FormatItem(rawValue: $0) })
     }
