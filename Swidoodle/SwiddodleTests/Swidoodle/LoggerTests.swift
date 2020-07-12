@@ -1,15 +1,16 @@
 //
-//  SwiddodleTests.swift
+//  LoggerTests.swift
 //  SwiddodleTests
 //
-//  Created by Minhyuk Kim on 2020/06/20.
+//  Created by Minhyuk Kim on 2020/07/12.
 //  Copyright © 2020 Mininny. All rights reserved.
 //
 
+import Foundation
 import XCTest
 @testable import Swidoodle
 
-class SwiddodleTests: XCTestCase {
+class LoggerTests: XCTestCase {
     func test_logLevels() {
         let trace = Logger.LogLevel.trace
         let verbose = Logger.LogLevel.verbose
@@ -30,11 +31,9 @@ class SwiddodleTests: XCTestCase {
     }
     
     func test_loggerWithSameLogLevel() {
-        let logHandler = BaseLogHandler(identifier: "test.handler.base.\(#function)")
         let destination = TestDestination(logLevel: .debug)
-        logHandler.addDestination(destination)
+        let logger = Mock.baseLogger(logLevel: .debug, destination: destination)
         
-        let logger = Logger(logLevel: .debug, handlers: [logHandler])
         logger.trace()
         logger.verbose(message: "Verbose")
         logger.info(message: "Info")
@@ -48,12 +47,10 @@ class SwiddodleTests: XCTestCase {
         XCTAssertEqual(destination.output.removeFirst().message, "Error")
     }
     
-    func test_loggerWithHigherDestinationLevel() {
-        let logHandler = BaseLogHandler(identifier: "test.handler.base.\(#function)")
+    func test_loggerWithHigherDestinationLogLevel() {
         let destination = TestDestination(logLevel: .warning)
-        logHandler.addDestination(destination)
-        
-        let logger = Logger(logLevel: .debug, handlers: [logHandler])
+        let logger = Mock.baseLogger(logLevel: .debug, destination: destination)
+
         logger.trace()
         logger.verbose(message: "Verbose")
         logger.info(message: "Info")
@@ -66,12 +63,10 @@ class SwiddodleTests: XCTestCase {
         XCTAssertEqual(destination.output.removeFirst().message, "Error")
     }
     
-    func test_loggerWithLowerDestinationLevel() {
-        let logHandler = BaseLogHandler(identifier: "test.handler.base.\(#function)")
+    func test_loggerWithLowerDestinationLogLevel() {
         let destination = TestDestination(logLevel: .verbose)
-        logHandler.addDestination(destination)
+        let logger = Mock.baseLogger(logLevel: .debug, destination: destination)
         
-        let logger = Logger(logLevel: .debug, handlers: [logHandler])
         logger.trace()
         logger.verbose(message: "Verbose")
         logger.info(message: "Info")
@@ -86,11 +81,9 @@ class SwiddodleTests: XCTestCase {
     }
     
     func test_loggerWithFallThroughLoggerLevel() {
-        let logHandler = BaseLogHandler(identifier: "test.handler.base.\(#function)")
         let destination = TestDestination(logLevel: .trace)
-        logHandler.addDestination(destination)
+        let logger = Mock.baseLogger(logLevel: .fallthrough, destination: destination)
         
-        let logger = Logger(logLevel: .fallthrough, handlers: [logHandler])
         logger.trace()
         logger.verbose(message: "Verbose")
         logger.info(message: "Info")
@@ -105,25 +98,5 @@ class SwiddodleTests: XCTestCase {
         XCTAssertEqual(destination.output.removeFirst().message, "Debug")
         XCTAssertEqual(destination.output.removeFirst().message, "Warning")
         XCTAssertEqual(destination.output.removeFirst().message, "Error")
-    }
-    
-    func test_formatter() {
-        let logHandler = BaseLogHandler(identifier: "test.handler.base.\(#function)")
-        let formatter = BaseFormatter()
-        let destination = TestDestination(logLevel: .verbose, formatter)
-        logHandler.addDestination(destination)
-        
-        
-        let logger = Logger(logLevel: .debug, handlers: [logHandler])
-        
-        let metadata = ["Key": "Item"]
-        let message = "Test"
-        let tag: Logger.MetadataValue = "Tag"
-        
-        formatter.logFormat = "[logLevel] message - function:"// metadata, tag"
-        logger.debug(message: "Test", metadata: ["Key": "Item"], tag: tag)
-        let formattedMessage = destination.formatter.format(destination.output.removeFirst())
-        
-        XCTAssertEqual(formattedMessage, "[DEBUG] \(message) - \(#function):")
     }
 }

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		52230418249E1BDF005C50B6 /* SwiddodleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52230417249E1BDF005C50B6 /* SwiddodleTests.swift */; };
 		5223041A249E1BDF005C50B6 /* Swidoodle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 523BC09E248D49E500B87CA8 /* Swidoodle.framework */; };
 		52230425249E253F005C50B6 /* Formattable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52230424249E253F005C50B6 /* Formattable.swift */; };
 		52230427249E5AF5005C50B6 /* Logger.LogLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52230426249E5AF5005C50B6 /* Logger.LogLevel.swift */; };
@@ -23,6 +22,16 @@
 		523BC0CC248D611E00B87CA8 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0CB248D611E00B87CA8 /* Formatter.swift */; };
 		523BC0CE248D612D00B87CA8 /* BaseFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */; };
 		5260680D24A1008A00319980 /* OSLogDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5260680C24A1008900319980 /* OSLogDestination.swift */; };
+		527C591D24BB4EC400598891 /* LoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C591C24BB4EC400598891 /* LoggerTests.swift */; };
+		527C592024BB4ED000598891 /* LogHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C591F24BB4ED000598891 /* LogHandlerTests.swift */; };
+		527C592224BB4ED900598891 /* DestinationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592124BB4ED900598891 /* DestinationTests.swift */; };
+		527C592424BB4EE400598891 /* FormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592324BB4EE400598891 /* FormatterTests.swift */; };
+		527C592624BB4EF100598891 /* LogMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592524BB4EF100598891 /* LogMessageTests.swift */; };
+		527C592824BB4F0600598891 /* FormattableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592724BB4F0600598891 /* FormattableTests.swift */; };
+		527C592B24BB50AF00598891 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592A24BB50AF00598891 /* Mock.swift */; };
+		527C592D24BB598800598891 /* Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592C24BB598800598891 /* Equatable.swift */; };
+		527C592F24BB5C7700598891 /* LoggerInterfaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C592E24BB5C7700598891 /* LoggerInterfaceTests.swift */; };
+		527C593524BB5E8800598891 /* XCTest+Swidoodle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527C593424BB5E8800598891 /* XCTest+Swidoodle.swift */; };
 		52C94A8F24938B1600ADA6DB /* LogMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52C94A8E24938B1600ADA6DB /* LogMessage.swift */; };
 		52E6893724B37D9900FF3B45 /* TestDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E6893624B37D9900FF3B45 /* TestDestination.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +48,6 @@
 
 /* Begin PBXFileReference section */
 		52230415249E1BDF005C50B6 /* SwiddodleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiddodleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		52230417249E1BDF005C50B6 /* SwiddodleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiddodleTests.swift; sourceTree = "<group>"; };
 		52230419249E1BDF005C50B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		52230424249E253F005C50B6 /* Formattable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formattable.swift; sourceTree = "<group>"; };
 		52230426249E5AF5005C50B6 /* Logger.LogLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.LogLevel.swift; sourceTree = "<group>"; };
@@ -57,6 +65,16 @@
 		523BC0CB248D611E00B87CA8 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		523BC0CD248D612D00B87CA8 /* BaseFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseFormatter.swift; sourceTree = "<group>"; };
 		5260680C24A1008900319980 /* OSLogDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLogDestination.swift; sourceTree = "<group>"; };
+		527C591C24BB4EC400598891 /* LoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerTests.swift; sourceTree = "<group>"; };
+		527C591F24BB4ED000598891 /* LogHandlerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHandlerTests.swift; sourceTree = "<group>"; };
+		527C592124BB4ED900598891 /* DestinationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationTests.swift; sourceTree = "<group>"; };
+		527C592324BB4EE400598891 /* FormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatterTests.swift; sourceTree = "<group>"; };
+		527C592524BB4EF100598891 /* LogMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMessageTests.swift; sourceTree = "<group>"; };
+		527C592724BB4F0600598891 /* FormattableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattableTests.swift; sourceTree = "<group>"; };
+		527C592A24BB50AF00598891 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		527C592C24BB598800598891 /* Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equatable.swift; sourceTree = "<group>"; };
+		527C592E24BB5C7700598891 /* LoggerInterfaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerInterfaceTests.swift; sourceTree = "<group>"; };
+		527C593424BB5E8800598891 /* XCTest+Swidoodle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+Swidoodle.swift"; sourceTree = "<group>"; };
 		52C94A8E24938B1600ADA6DB /* LogMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogMessage.swift; sourceTree = "<group>"; };
 		52E6893624B37D9900FF3B45 /* TestDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDestination.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,8 +101,9 @@
 		52230416249E1BDF005C50B6 /* SwiddodleTests */ = {
 			isa = PBXGroup;
 			children = (
-				52230417249E1BDF005C50B6 /* SwiddodleTests.swift */,
-				52E6893624B37D9900FF3B45 /* TestDestination.swift */,
+				527C592E24BB5C7700598891 /* LoggerInterfaceTests.swift */,
+				527C591B24BB4EB400598891 /* Swidoodle */,
+				527C592924BB508600598891 /* Utils */,
 				52230419249E1BDF005C50B6 /* Info.plist */,
 			);
 			path = SwiddodleTests;
@@ -161,6 +180,46 @@
 				52C94A8E24938B1600ADA6DB /* LogMessage.swift */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		527C591B24BB4EB400598891 /* Swidoodle */ = {
+			isa = PBXGroup;
+			children = (
+				527C591C24BB4EC400598891 /* LoggerTests.swift */,
+				527C591F24BB4ED000598891 /* LogHandlerTests.swift */,
+				527C592124BB4ED900598891 /* DestinationTests.swift */,
+				527C592324BB4EE400598891 /* FormatterTests.swift */,
+				527C592724BB4F0600598891 /* FormattableTests.swift */,
+				527C592524BB4EF100598891 /* LogMessageTests.swift */,
+			);
+			path = Swidoodle;
+			sourceTree = "<group>";
+		};
+		527C592924BB508600598891 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				527C592A24BB50AF00598891 /* Mock.swift */,
+				527C592C24BB598800598891 /* Equatable.swift */,
+				527C593224BB5C8E00598891 /* TestModels */,
+				527C593324BB5E7700598891 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		527C593224BB5C8E00598891 /* TestModels */ = {
+			isa = PBXGroup;
+			children = (
+				52E6893624B37D9900FF3B45 /* TestDestination.swift */,
+			);
+			path = TestModels;
+			sourceTree = "<group>";
+		};
+		527C593324BB5E7700598891 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				527C593424BB5E8800598891 /* XCTest+Swidoodle.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,8 +332,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527C593524BB5E8800598891 /* XCTest+Swidoodle.swift in Sources */,
+				527C592624BB4EF100598891 /* LogMessageTests.swift in Sources */,
+				527C592424BB4EE400598891 /* FormatterTests.swift in Sources */,
+				527C592B24BB50AF00598891 /* Mock.swift in Sources */,
+				527C592F24BB5C7700598891 /* LoggerInterfaceTests.swift in Sources */,
+				527C592D24BB598800598891 /* Equatable.swift in Sources */,
 				52E6893724B37D9900FF3B45 /* TestDestination.swift in Sources */,
-				52230418249E1BDF005C50B6 /* SwiddodleTests.swift in Sources */,
+				527C591D24BB4EC400598891 /* LoggerTests.swift in Sources */,
+				527C592824BB4F0600598891 /* FormattableTests.swift in Sources */,
+				527C592024BB4ED000598891 /* LogHandlerTests.swift in Sources */,
+				527C592224BB4ED900598891 /* DestinationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

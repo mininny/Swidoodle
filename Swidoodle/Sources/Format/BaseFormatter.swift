@@ -9,6 +9,16 @@
 import Foundation
 
 class BaseFormatter: Formatter {
+    var substituteEmpty: Bool
+    
+    init(substituteEmpty: Bool) {
+        self.substituteEmpty = substituteEmpty
+    }
+    
+    convenience init() {
+        self.init(substituteEmpty: false)
+    }
+
     internal lazy var formattedLogItems: [FormatItem] = {
         return [FormatItem](fromFormat: self.logFormat)
     }()
@@ -33,17 +43,30 @@ class BaseFormatter: Formatter {
     
     internal func format(_ content: LogMessage) -> String {
         return self.formattedLogItems.reduce(into: "") { result, formatItem in
+            var formattedItem: String
+            
             switch formatItem {
-            case .date: result += self.format(formattable: Date())
-            case .logLevel: result += self.format(formattable: content.logLevel)
-            case .message: result += self.format(formattable: content.message)
-            case .file: result += self.format(formattable: content.file)
-            case .function: result += self.format(formattable: content.function)
-            case .line: result += self.format(formattable: content.line)
-            case .metadata: result += self.format(formattable: content.metadata)
-            case .tag: result += self.format(formattable: content.tag)
-            case .default(let str): result += self.format(formattable: str)
+            case .date:
+                formattedItem = self.format(formattable: Date())
+            case .logLevel:
+                formattedItem = self.format(formattable: content.logLevel)
+            case .message:
+                formattedItem = self.format(formattable: content.message)
+            case .file:
+                formattedItem = self.format(formattable: content.file)
+            case .function:
+                formattedItem = self.format(formattable: content.function)
+            case .line:
+                formattedItem = self.format(formattable: content.line)
+            case .metadata:
+                formattedItem = self.format(formattable: content.metadata)
+            case .tag:
+                formattedItem = self.format(formattable: content.tag)
+            case .default(let str):
+                formattedItem = self.format(formattable: str)
             }
+            
+            result.append(formattedItem, self.substituteEmpty)
         }.trimmingCharacters(in: .whitespacesAndNewlines)//.init(charactersIn: " ,:;-=~[{\\\n\t"))
     }
     
@@ -56,7 +79,7 @@ class BaseFormatter: Formatter {
             return logLevel.description
         
         case let metadata as Logger.Metadata:
-            return "{ \(metadata.map{ "\($0.key): { \($0.value.description) }" }.joined(separator: ", ")) }"
+            return metadata.description
         
         case let tag as Logger.Tag:
             return tag.description
@@ -66,3 +89,11 @@ class BaseFormatter: Formatter {
         }
     }
 }
+
+fileprivate extension String {
+    mutating func append(_ string: String, _ substituteEmpty: Bool) {
+        if string == "" && substituteEmpty { self.append("<Empty>") }
+        else { self.append(string) }
+    }
+}
+ 

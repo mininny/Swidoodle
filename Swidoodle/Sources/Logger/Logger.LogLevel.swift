@@ -40,3 +40,6 @@ extension Logger {
         case error
     }
 }
+
+
+extension Logger.LogLevel: CaseIterable { }

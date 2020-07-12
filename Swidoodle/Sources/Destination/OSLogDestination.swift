@@ -56,7 +56,7 @@ class OSLogDestination: Destination {
     }
 }
 
-private extension Logger.LogLevel {
+extension Logger.LogLevel {
     var asOSLogType: OSLogType? {
         switch self {
         case .fallthrough: return nil
