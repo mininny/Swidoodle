@@ -1,0 +1,75 @@
+default_platform(:ios)
+
+XCOV_SAVE_PATH = "/Users/distiller/Library/xcov"
+XCOV_OUTPUT_PATH = "/tmp/xcov/output"
+TEST_OUTPUT_PATH = "/tmp/scan/output"
+SAVE_PATH = "/Users/distiller/Library/xcov/tmp"
+
+PROJECT_NAME='Swidoodle.xcodeproj'
+SCHEME = 'Swidoodle'
+
+platform :ios do
+  before_all do
+    setup_travis
+
+    # Create temporary folder and change access permissions
+    require "fileutils"
+    FileUtils.mkdir_p("#{XCOV_SAVE_PATH}/logs/#{ENV["FASTLANE_LANE_NAME"]}/Test")
+    FileUtils.chmod "u=wrx,go=rx", "#{XCOV_SAVE_PATH}/logs/#{ENV["FASTLANE_LANE_NAME"]}/Test"
+
+    FileUtils.mkdir_p(TEST_OUTPUT_PATH)
+    FileUtils.chmod "u=wrx,go=rx", TEST_OUTPUT_PATH
+  end
+
+   lane :run_test do
+    test_run_block = lambda do |testrun_info|
+      previous_paths = Dir["#{SAVE_PATH}/Logs/Test/*"]
+      UI.important("Stored Paths: #{previous_paths}")
+
+      xcresult_paths = Dir["#{Scan.config[:derived_data_path]}/Logs/Test/*"]
+      UI.important("Saving Files:  #{xcresult_paths}")
+
+      temp_destination = "#{SAVE_PATH}/Logs"
+      UI.important("from #{Scan.config[:derived_data_path]}/Logs/Test} to #{temp_destination}")
+      
+      # Move test results to temporary folder
+      require "fileutils"
+      FileUtils.cp_r("#{Scan.config[:derived_data_path]}/Logs/Test", temp_destination)
+    end
+    
+    # Create temporary folder and change access permissions
+    require "fileutils"
+    FileUtils.mkdir_p("#{SAVE_PATH}/Logs/Test")
+    FileUtils.chmod "u=wrx,go=rx", "#{SAVE_PATH}/Logs/Test"
+
+    # Run All Tests
+    multi_scan(
+      project: File.absolute_path("../Swidoodle/#{PROJECT_NAME}"),
+      scheme: SCHEME,
+      output_directory: TEST_OUTPUT_PATH,
+      collate_reports: true,
+      code_coverage: true,
+      try_count: 3,
+      testrun_completed_block: test_run_block
+    )
+
+    multi_scan(
+      project: File.absolute_path("../Swidoodle/#{PROJECT_NAME}"),
+      scheme: SCHEME,
+      output_directory: TEST_OUTPUT_PATH,
+      max_concurrent_simulators: 4,
+      collate_reports: true,
+      code_coverage: true,
+      try_count: 3,
+      testrun_completed_block: test_run_block
+    )
+
+    # Generate Test Coverage
+    xcov(
+      project: File.absolute_path("../Swidoodle/#{PROJECT_NAME}"),
+      scheme: SCHEME,
+      output_directory: XCOV_OUTPUT_PATH,
+      derived_data_path: SAVE_PATH
+    )
+  end
+end

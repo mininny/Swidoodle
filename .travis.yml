@@ -1,0 +1,6 @@
+language: swift
+osx_image: xcode11.3
+install:
+  - bundle install
+script:
+  - fastlane run_test
