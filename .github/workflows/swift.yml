@@ -7,9 +7,8 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build
-      run: swift build -v
-      working-directory: Swidoodle
     - name: Run tests
-      run: swift test -v
-      working-directory: Swidoodle
+      run: |
+        xcodebuild clean test -project Swidoodle.xcodeproj -scheme Swidoodle -destination "$DESTINATION" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+      working-directory: Swidoodle/
+
