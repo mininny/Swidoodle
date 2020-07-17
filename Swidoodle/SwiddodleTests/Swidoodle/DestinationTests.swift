@@ -32,3 +32,31 @@ extension DestinationTests {
         XCTAssertEqual(logLevels.removeFirst().asOSLogType, .fault)
     }
 }
+
+
+// ConsoleDestination
+extension DestinationTests {
+    func test_consoleDestination() {
+        let destination = ConsoleDestination(identifier: self.identifier(), logLevel: .debug)
+        let logger = Mock.baseLogger(logLevel: .debug, destination: destination)
+        
+        logger.debug(message: "Message")
+    }
+    
+    func test_consoleDestinationLog() {
+        let destination = MockConsoleDestination(identifier: self.identifier(), logLevel: .debug)
+        let logger = Mock.baseLogger(logLevel: .debug, destination: destination)
+        
+        logger.debug(message: "Message")
+        
+        XCTAssertEqual(destination.outputs.first?.message, "Message")
+    }
+}
+
+class MockConsoleDestination: ConsoleDestination {
+    var outputs: [LogMessage] = []
+    
+    override func log(message: LogMessage) {
+        self.outputs.append(message)
+    }
+}

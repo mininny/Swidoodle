@@ -57,7 +57,39 @@ class FormatterTests: XCTestCase {
         XCTAssertEqual(defaultFormatItem.description, "defaultItem")
     }
     
-    func test_formatter() {
+    func test_formatItemAsRaw() {
+        var formatItems = FormatItem.allCases
+        
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "date")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "logLevel")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "message")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "file")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "function")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "line")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "metadata")
+        XCTAssertEqual(formatItems.removeFirst().asRaw, "tag")
+        
+        let defaultFormatItem = FormatItem.default(value: "defaultItem")
+        XCTAssertEqual(defaultFormatItem.asRaw, "")
+    }
+    
+    func test_formatItemRawValue() {
+        var formatItems = FormatItem.allCases
+        
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "date")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "logLevel")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "message")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "file")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "function")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "line")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "metadata")
+        XCTAssertEqual(formatItems.removeFirst().rawValue, "tag")
+        
+        let defaultFormatItem = FormatItem.default(value: "defaultItem")
+        XCTAssertEqual(defaultFormatItem.rawValue, "defaultItem")
+    }
+    
+    func test_baseFormatter() {
         let formatter = BaseFormatter()
         let destination = TestDestination(logLevel: .verbose, formatter)
         

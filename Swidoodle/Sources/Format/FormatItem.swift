@@ -35,7 +35,7 @@ extension FormatItem: RawRepresentable  {
         self = FormatItem.allCases.first(where: { $0.asRaw == rawValue }) ?? .default(value: rawValue)
     }
     
-    var asRaw: String? {
+    var asRaw: String {
         switch self {
         case .date: return "date"
         case .logLevel: return "logLevel"
@@ -45,7 +45,7 @@ extension FormatItem: RawRepresentable  {
         case .line: return "line"
         case .metadata: return "metadata"
         case .tag: return "tag"
-        case .default: return nil
+        case .default: return ""
         }
     }
     
@@ -54,7 +54,7 @@ extension FormatItem: RawRepresentable  {
     public var rawValue: RawValue {
         switch self {
         case .default(let str): return str
-        default: return self.asRaw ?? ""
+        default: return self.asRaw
         }
     }
 }

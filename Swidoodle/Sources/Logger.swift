@@ -11,7 +11,7 @@ import Foundation
 public class Logger {
     var handlers: [String: LogHandler]
     
-    var logLevel: LogLevel = .warning
+    var logLevel: LogLevel = .debug
     
     init(logLevel: LogLevel, handlers: [String: LogHandler] = [:]) {
         self.logLevel = logLevel

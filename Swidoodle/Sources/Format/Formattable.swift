@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Formattable: CustomStringConvertible { }
+public protocol Formattable: CustomStringConvertible { }
 extension String: Formattable { }
 extension Logger.Metadata: Formattable { }
 extension UInt: Formattable { }

@@ -7,3 +7,30 @@
 //
 
 import Foundation
+
+import Foundation
+import XCTest
+@testable import Swidoodle
+
+class LoggerInterfaceTests: XCTestCase {
+    func test_logger() {
+        let destination = TestDestination(logLevel: .trace)
+        Logger.main.handlers.first?.value.addDestination(destination)
+        Logger.main.logLevel = .trace
+        
+        Logger.trace()
+        Logger.verbose(message: "Verbose")
+        Logger.info(message: "Info")
+        Logger.debug(message: "Debug")
+        Logger.warning(message: "Warning")
+        Logger.error(message: "Error")
+        
+        XCTAssertEqual(destination.output.count, 6)
+        XCTAssertEqual(destination.output.removeFirst().message, "")
+        XCTAssertEqual(destination.output.removeFirst().message, "Verbose")
+        XCTAssertEqual(destination.output.removeFirst().message, "Info")
+        XCTAssertEqual(destination.output.removeFirst().message, "Debug")
+        XCTAssertEqual(destination.output.removeFirst().message, "Warning")
+        XCTAssertEqual(destination.output.removeFirst().message, "Error")
+    }
+}

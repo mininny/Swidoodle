@@ -15,8 +15,5 @@ public protocol Formatter {
     var formattedLogItems: [FormatItem] { get }
     
     func format(_ content: LogMessage) -> String
-}
-
-extension Formatter {
-    func format(formattable content: Formattable?) -> String { "" }
+    func format(formattable content: Formattable?) -> String
 }

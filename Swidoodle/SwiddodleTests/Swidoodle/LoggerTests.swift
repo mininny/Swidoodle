@@ -99,4 +99,106 @@ class LoggerTests: XCTestCase {
         XCTAssertEqual(destination.output.removeFirst().message, "Warning")
         XCTAssertEqual(destination.output.removeFirst().message, "Error")
     }
+    
+    func test_loggerLogLevel() {
+        var logLevels = Logger.LogLevel.allCases
+        
+        XCTAssertEqual(logLevels.removeFirst().description, "")
+        XCTAssertEqual(logLevels.removeFirst().description, "TRACE")
+        XCTAssertEqual(logLevels.removeFirst().description, "VERBOSE")
+        XCTAssertEqual(logLevels.removeFirst().description, "INFO")
+        XCTAssertEqual(logLevels.removeFirst().description, "DEBUG")
+        XCTAssertEqual(logLevels.removeFirst().description, "WARNING")
+        XCTAssertEqual(logLevels.removeFirst().description, "ERROR")
+    }
+    
+    func test_loggerAddHandler() {
+        let destination = TestDestination(logLevel: .trace)
+        let logger = Mock.baseLogger(logLevel: .trace)
+        
+        logger.addHandler(BaseLogHandler(identifier: "testHandler.\(#function)", destinations: [destination]))
+            
+        logger.debug(message: "Message")
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message")
+    }
+    
+    func test_loggerRemoveHandler() {
+        let destination = TestDestination(logLevel: .trace)
+        let logger = Mock.baseLogger(logLevel: .trace)
+        
+        let handler = BaseLogHandler(identifier: "testHandler.\(#function)", destinations: [destination])
+        logger.addHandler(handler)
+            
+        logger.debug(message: "Message")
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message")
+        
+        logger.removeHandler(handler)
+        
+        logger.debug(message: "Message")
+        
+        XCTAssertTrue(destination.output.isEmpty)
+        
+    }
+    
+    func test_loggerRemoveHandlerByIdentifier() {
+        let destination = TestDestination(logLevel: .trace)
+        let logger = Mock.baseLogger(logLevel: .trace)
+        
+        let handler = BaseLogHandler(identifier: "testHandler.\(#function)", destinations: [destination])
+        logger.addHandler(handler)
+            
+        logger.debug(message: "Message")
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message")
+        
+        logger.removeHandler(for: "testHandler.\(#function)")
+        logger.debug(message: "Message")
+        
+        XCTAssertTrue(destination.output.isEmpty)
+    }
+    
+    func test_loggerAddHandlerWithExistingIdentifier() {
+        let destination = TestDestination(logLevel: .trace)
+        let invalidDestination = TestDestination(logLevel: .trace)
+        
+        let logger = Mock.baseLogger(logLevel: .trace)
+        let handler = BaseLogHandler(identifier: "testHandler.\(#function)", destinations: [destination])
+        let invalidHandler = BaseLogHandler(identifier: "testHandler.\(#function)", destinations: [destination])
+        logger.addHandler(handler)
+        
+        logger.debug(message: "Message")
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message")
+        XCTAssertTrue(invalidDestination.output.isEmpty)
+        
+        logger.addHandler(invalidHandler)
+        
+        logger.debug(message: "Message2")
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message2")
+        XCTAssertTrue(invalidDestination.output.isEmpty)
+    }
+    
+    func test_createLoggerWithHandlerDictionary() {
+        let destination = TestDestination(logLevel: .trace)
+        let handler1 = BaseLogHandler(identifier: UUID().uuidString, destinations: [destination])
+        let handler2 = BaseLogHandler(identifier: UUID().uuidString, destinations: [destination])
+        
+        let logger = Logger(logLevel: .trace, handlers: ["handler1": handler1,
+                                                         "handler2": handler2])
+        
+        logger.log(message: "Message1", logLevel: .verbose)
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message1") // from handler 1
+        XCTAssertEqual(destination.output.removeFirst().message, "Message1") // from handler 2
+        
+        logger.removeHandler(for: "handler2")
+        
+        logger.log(message: "Message2", logLevel: .verbose)
+        
+        XCTAssertEqual(destination.output.removeFirst().message, "Message2") // from handler 1
+        XCTAssertTrue(destination.output.isEmpty) // Handler 2 is removed
+    }
 }
