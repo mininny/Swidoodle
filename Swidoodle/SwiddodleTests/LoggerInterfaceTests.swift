@@ -33,4 +33,25 @@ class LoggerInterfaceTests: XCTestCase {
         XCTAssertEqual(destination.output.removeFirst().message, "Warning")
         XCTAssertEqual(destination.output.removeFirst().message, "Error")
     }
+    
+    func test_loggerAddDestination() {
+        let destination = TestDestination(logLevel: .trace)
+        Logger.setLogLevel(.trace)
+        Logger.addDestination(destination)
+        
+        Logger.trace()
+        Logger.verbose(message: "Verbose")
+        Logger.info(message: "Info")
+        Logger.debug(message: "Debug")
+        Logger.warning(message: "Warning")
+        Logger.error(message: "Error")
+        
+        XCTAssertEqual(destination.output.count, 6)
+        XCTAssertEqual(destination.output.removeFirst().message, "")
+        XCTAssertEqual(destination.output.removeFirst().message, "Verbose")
+        XCTAssertEqual(destination.output.removeFirst().message, "Info")
+        XCTAssertEqual(destination.output.removeFirst().message, "Debug")
+        XCTAssertEqual(destination.output.removeFirst().message, "Warning")
+        XCTAssertEqual(destination.output.removeFirst().message, "Error")
+    }
 }

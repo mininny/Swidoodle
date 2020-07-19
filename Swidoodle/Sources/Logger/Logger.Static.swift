@@ -36,3 +36,18 @@ extension Logger {
         self.main.error(message: message, file: file, function: function, line: line, metadata: metadata, tag: tag)
     }
 }
+
+extension Logger {
+    public static func setLogLevel(_ logLevel: LogLevel) {
+        self.main.logLevel = logLevel
+    }
+    
+    public static func addDestination(_ destination: Destination) {
+        if self.main.handlers.isEmpty {
+            let handler = BaseLogHandler(identifier: "com.mininny.swidoodle.logger.static.handler.base", destinations: [destination])
+            self.main.addHandler(handler)
+        } else {
+            self.main.handlers.first?.value.addDestination(destination)
+        }
+    }
+}
