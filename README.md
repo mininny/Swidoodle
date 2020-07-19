@@ -19,12 +19,15 @@ Swidoodle provides simple logger interface for out-of-the-box usage.
 import Swidoodle
 
 Logger.addDestination(ConsoleDestination(identifier: "myLogger", logLevel: .verbose))
+Logger.setLogLevel(.verbose)
 Logger.debug("Invoked function")
+Logger.error("Fatal Error!")
 ```
 
 ```swift
 // output
-"2020-06-30 12:43:13 [verbose] Invoked function - #function: #line"
+"2020-06-30 12:43:13 [VERBOSE] Invoked function - #function: #line"
+"2020-06-30 12:43:14 [ERROR] Fatal Error! - #function: #line"
 ```
 
 You can add custom destinations to choose where your logs should be printed at. Swidoodle will use the default formatter to format your message, including the time, log level, function, line, and other information. 
@@ -52,12 +55,17 @@ Swidoodle is composed of 3 components:
 LogLevel allows you to specify the severity of the log message. 
 There are 6 levels of severity in Swidoodle.
 
-1. trace
-2. verbose
-3. info
-4. debug
-5. warning
-6. error
+```swift
+public enum LogLevel {
+    case trace // For tracing call stack
+    case verbose // Verbose messages
+    case info // Information useful for tracking
+    case debug // Important message for debugging
+    case warning // Non-fatal warning critical for debugging
+    case error // Important fatal error
+}
+
+```
 
 With trace being the lowest level of severity and error being the highest, you should use this value to filter your log messages.
 
@@ -65,14 +73,14 @@ You can set a specific LogLevel to your `Logger` and `Destination`, so your log 
 
 ### Log Message
 Log Messsage includes a lot of different data fields. In Swidoodle, there are the following items in the logging API:
-- message
+- **message**
 - date
-- logLevel
+- *logLevel*
 - file
 - function
 - line
-- metadata
-- tag
+- **metadata**
+- **tag**
 
 `date`, `file`, `function`, and `line` will be filled in automatically using Xcode's autocomplete function. 
 
@@ -108,11 +116,12 @@ Instead of cryptic codes, you can use natural language to format the logs.
 
 ```swift
 formatter.logFormat = "logLevel - message : file, date"
-```
+"verbose - Log Message : Logging.swift, 2020-06-30 12:43:13+0900"
 
-```swift
-// output
-"verbose - Log Message : Logging.swift, 2020-06-30 12:43:13"
+///
+
+formatter.logFormat = "date [logLevel] message - function: line - metadata, tag"
+"2020-07-20 01:12:39+0900 [DEBUG] Log Message - logging_test(): 43 - ["Key": Item, Item2], Tag"
 ````
 
 | Item | Description | 
