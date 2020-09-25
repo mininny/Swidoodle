@@ -7,10 +7,11 @@ jobs:
   build:
 
     macos:
-      xcode: 11.0.0 # Specify the Xcode version to use
+      xcode: 11.6.0 # Specify the Xcode version to use
 
     steps:
       - checkout
+      - gem install bundler
       - run:
           name: Download & Update bundle
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
