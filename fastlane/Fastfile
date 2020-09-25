@@ -47,6 +47,7 @@ platform :ios do
       project: File.absolute_path("../Swidoodle/#{PROJECT_NAME}"),
       scheme: SCHEME,
       output_directory: TEST_OUTPUT_PATH,
+      device: 'iPhone 11 Pro',
       collate_reports: true,
       code_coverage: true,
       try_count: 3,
