@@ -11,8 +11,16 @@ jobs:
 
     steps:
       - checkout
-      - run: pod install # Install CocoaPods dependencies
-      - run: fastlane scan # Run tests using Fastlane
+      - run:
+          name: Download & Update bundle
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
+      - run:
+          name: Update Fastlane
+          command: bundle update fastlane
+      - run:
+          name: Update plugins
+          command: bundle exec fastlane update_plugins
+      - run: bundle exec fastlane run_test # Run tests using Fastlane
 
       # Collect XML test results data to show in the UI, and save the same XML
       # files under test-results folder in the Artifacts tab

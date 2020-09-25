@@ -53,17 +53,6 @@ platform :ios do
       testrun_completed_block: test_run_block
     )
 
-    multi_scan(
-      project: File.absolute_path("../Swidoodle/#{PROJECT_NAME}"),
-      scheme: SCHEME,
-      output_directory: TEST_OUTPUT_PATH,
-      max_concurrent_simulators: 4,
-      collate_reports: true,
-      code_coverage: true,
-      try_count: 3,
-      testrun_completed_block: test_run_block
-    )
-
     # Generate Test Coverage
     xcov(
       project: File.absolute_path("../Swidoodle/#{PROJECT_NAME}"),
